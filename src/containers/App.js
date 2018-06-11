@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
-import './App.css';
+import classes from './App.css';
 //import Radium from 'radium';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
@@ -82,14 +82,15 @@ class App extends Component {
   //use props(of certain defined tag) to refer method in other files
   render() {
     //styling => button
-    const style = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '1x solid blue',
-      padding: '8px'
-    };
+    // const style = {
+    //   backgroundColor: 'white',
+    //   font: 'inherit',
+    //   border: '1x solid blue',
+    //   padding: '8px'
+    // };
 
     let persons = null;
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -100,6 +101,8 @@ class App extends Component {
           />
         </div>
       );
+
+      btnClass = classes.Red;
     }
     //assign key to each element in the list
     //click(onClick property in person.js) to delete person
@@ -112,18 +115,16 @@ class App extends Component {
         // <Person name = {this.state.person[1].name}/>
         // <Person name = {this.state.person[2].name}/>
         
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold');
-    }
+
 
 
     return (
       <div className={classes.App}>
-        <Cockpit />
+        <Cockpit 
+        showPersons={this.state.showPersons}
+        persons={this.state.persons}
+        clicked={this.togglePersonsHandler}
+        />
         {persons}
       </div>
     );
