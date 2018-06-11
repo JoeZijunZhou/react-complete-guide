@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Person from './Person/person';
+import Person from '../components/Persons/Person/person';
 
 class App extends Component {
   //using state
@@ -10,7 +10,9 @@ class App extends Component {
       {name: "zzj", age: 24},
       {name: "zz", age: 23},
       {name: "z", age: 22}
-    ]
+    ],
+    otherState: 'some other value',
+    showPersons: false
   }
 
   switchNameHandler = (nameVar) => {
@@ -42,6 +44,12 @@ class App extends Component {
     )
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
+
   //use .bind()to pass parameter, assign val to parameter
   //use props(of certain defined tag) to refer method in other files
   render() {
@@ -57,14 +65,19 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'am react</h1>
         <button
-         onClick={this.switchNameHandler.bind(this, "yue")}
+         onClick={this.togglePersonsHandler}
          style={style} >Switch person</button>
-        <Person
-         name = {this.state.person[0].name}
-         click={this.switchNameHandler.bind(this, "joe")}
-         changed={this.changeNameHandler} >i am child </Person>
-        <Person name = {this.state.person[1].name}/>
-        <Person name = {this.state.person[2].name}/>
+        {
+          this.state.showPersons === true ?
+            <div>
+              <Person
+              name = {this.state.person[0].name}
+              click={this.switchNameHandler.bind(this, "joe")}
+              changed={this.changeNameHandler} >i am child </Person>
+              <Person name = {this.state.person[1].name}/>
+              <Person name = {this.state.person[2].name}/>
+            </div> : null
+        }
       </div>
     );
   }
