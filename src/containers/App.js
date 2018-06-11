@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './App.css';
-import Person from '../components/Persons/Person/person';
+//import Radium from 'radium';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
 
 class App extends Component {
   //using state
@@ -91,15 +93,11 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-            click={() => this.deletePersonHandler(index)}
-            name={person.name}
-            age={person.age}
-            key={person.id}
-            changed={(event) => this.changeNameHandler(event, person.id)}
-            />
-          })}
+          <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.changeNameHandler}
+          />
         </div>
       );
     }
@@ -114,14 +112,18 @@ class App extends Component {
         // <Person name = {this.state.person[1].name}/>
         // <Person name = {this.state.person[2].name}/>
         
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
 
 
     return (
-      <div className="App">
-        <h1>Hi, I'am react</h1>
-        <button
-         onClick={this.togglePersonsHandler}
-         style={style} >Switch person</button>
+      <div className={classes.App}>
+        <Cockpit />
         {persons}
       </div>
     );
