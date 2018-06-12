@@ -4,6 +4,7 @@ import classes from './App.css';
 //import Radium from 'radium';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
+import WithClass from '../hoc/WithClass';
 
 //purecomponent: has build-in update check(shouldupdate func)
 //use purecomponent only when no (many)need to render again
@@ -44,7 +45,8 @@ class App extends Component {
       {id:"c", name: "z", age: 22}
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    toggleClicked: 0
   }
 
   switchNameHandler = (nameVar) => {
@@ -104,7 +106,13 @@ class App extends Component {
   //show or hide persons handler
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons: !doesShow});
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClicked: prevState.toggleClicked+1
+        //setState that do not affected by other updates
+      }
+    });
   }
 
 
@@ -150,14 +158,14 @@ class App extends Component {
 
 
     return (
-      <div className={classes.App}>
+      <WithClass classes={classes.App}>
         <Cockpit 
         showPersons={this.state.showPersons}
         persons={this.state.persons}
         clicked={this.togglePersonsHandler}
         />
         {persons}
-      </div>
+      </WithClass>
     );
   }
 }
