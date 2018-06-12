@@ -5,7 +5,37 @@ import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit'
 
+//purecomponent: has build-in update check(shouldupdate func)
+//use purecomponent only when no (many)need to render again
+
 class App extends Component {
+  //component create life cycle
+  constructor(props) {
+    super(props);
+    console.log('inside constructor', props);    
+  }
+
+  componentWillMount() {
+    console.log('inside componentwillmount');
+  }
+  
+  componentDidMount() {
+    console.log('inside didmount');
+  }
+  //component internal update life cycle
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('inside persons shouldupdate');
+    return true;
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('inside persons willupdate');
+  }
+
+  componentDidUpdate() {
+    console.log('inside persons didupdate');
+  }
+
   //using state
   state = {
     persons: [
@@ -81,6 +111,7 @@ class App extends Component {
   //use .bind()to pass parameter, assign val to parameter
   //use props(of certain defined tag) to refer method in other files
   render() {
+    console.log('inside render')
     //styling => button
     // const style = {
     //   backgroundColor: 'white',

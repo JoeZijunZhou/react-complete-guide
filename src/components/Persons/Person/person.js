@@ -11,7 +11,21 @@ import classes from './person.css';
 
 //input onchange dynamically update event
 class Person extends Component {
+    constructor(props) {
+      super(props);
+      console.log('inside person constructor', props);    
+    }
+  
+    componentWillMount() {
+      console.log('inside person componentwillmount');
+    }
+    
+    componentDidMount() {
+      console.log('inside person didmount');
+    }
+    
     render() {
+        console.log('inside person render');
         return (
             <div className={classes.person}>
                 <h1 onClick={this.props.click}>i am {this.props.name} the person {Math.random()}</h1>
