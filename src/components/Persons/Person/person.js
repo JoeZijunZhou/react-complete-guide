@@ -10,14 +10,16 @@ import classes from './person.css';
 // }
 
 //input onchange dynamically update event
-const person = (props) => {
-    return (
-        <div className={classes.person}>
-            <h1 onClick={props.click}>i am {props.name} the person {Math.random()}</h1>
-            <h2>{props.children}</h2>
-            <input type="text" onChange={props.changed} />
-        </div>
-    )
-};
+class Person extends Component {
+    render() {
+        return (
+            <div className={classes.person}>
+                <h1 onClick={this.props.click}>i am {this.props.name} the person {Math.random()}</h1>
+                <h2>{this.props.children}</h2>
+                <input type="text" onChange={this.props.changed} />
+            </div>
+        )
+    }
+}
 
-export default person;
+export default Person;
