@@ -1,3 +1,11 @@
+# React Complete Guide
+This is a React.js features demo web app.
+
+It includes all important features of React.js framework such as component (and its life cycle), JSX, state, css module, and so on.
+
+Author: Zijun Zhou
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
